@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Meu primeiro programa</title>
+</head>
+
+<body>
+  <h1 id="ola-mundo"></h1>
+  <p id="descricao"></p>
+  <input type="text" id="mensagem" name="mensagem" placeholder="Mensagem">
+  <button id="btn-alert"></button>
+  <button id="btn-alert-confirm">Confirmação</button>
+  <button id="btn-alert-prompt">Prompt</button>
+
+  <script>
+    document.getElementById('btn-alert-confirm').onclick = function () {
+      let yesOn = window.confirm('Você deseja atualizar a página?')
+      if (yesOn) {
+        //document.location.reload(true) // Recarrega a página atual sem usar o cache
+        document.location.reload() // com cache recarrega a página
+
+        //location.reload(true) // Recarrega a página atual sem usar o cache
+        //location.reload() // com cache recarrega a página
+      } else {
+        alert('URL=' + document.URL) // Pegar a URL
+      }
+    }
+  </script>
+
+  <script>
+    document.getElementById('btn-alert-prompt').onclick = function () {
+      do {
+        let seuNomeAlert = window.prompt('Informe o seu nome?')
+
+        // CAMPO EM BRANCO
+        if (!seuNomeAlert.trim()) {
+          alert('O nome está vázio')
+          continue
+        }
+
+        alert(seuNomeAlert)
+        break
+      } while (true);
+
+
+    }
+  </script>
+
+  <script>
+    // INNER TEXT
+    document.getElementById('ola-mundo').innerText = 'Olá Mundo'
+    document.getElementById('descricao').innerText = 'Já me livrei da maldição'
+    document.getElementById('btn-alert').innerText = 'Primeira Mensagem'
+
+
+    document.getElementById('btn-alert').onclick = function () {
+      var mensagemAlert = document.getElementById('mensagem'); // capturar elemento
+      //validação do campo
+      if (mensagemAlert.value.trim() !== '') {
+        alert(mensagemAlert.value)
+        mensagemAlert.value = '' // apagar o campo
+      } else {
+        alert('Ops! O campo está vázio')
+      }
+    }
+
+
+
+    // STYLE
+    /*document.body.style.backgroundColor = '#222'
+    document.body.style.color = '#fff'
+    document.body.style.padding = '1em'
+    document.body.style.textAlign = 'center'
+    document.body.style.fontFamily = 'Arial'*/
+    let bodyStyle = document.body.style
+    bodyStyle.backgroundColor = '#222'
+    bodyStyle.color = '#aaa'
+    bodyStyle.padding = '2em'
+    bodyStyle.textAlign = 'center'
+    bodyStyle.fontFamily = 'Arial'
+
+  </script>
+</body>
+
+</html>
