@@ -108,9 +108,17 @@ function tipoDeArquivoParaExecutar(pathFile, aulaEscolhido) {
       require(pathFile);
       break;
     case "html":
-      browser(pathFile);
       terminal.write("Abrindo o navegador padrão ...\n");
-      process.exit(0);
+      browser(pathFile, {
+        wait: true,
+      })
+        .then(() => {
+          process.exit(0);
+        })
+        .catch((erro) => {
+          throw erro;
+        });
+      break;
     default:
       throw new Error("[ERROR] Não suportamos este tipo de arquivo");
   }
