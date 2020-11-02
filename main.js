@@ -46,7 +46,7 @@ function usuarioEscolherModuloCurso() {
   terminal.question("Qual modulo você deseja selecionar: ", (resposta) => {
     const opcao = parseInt(resposta, 10);
     if (opcao == 0) {
-      terminal.close();
+      process.exit(0);
     } else if (cursos[opcao] == undefined) {
       throw new Error("[ERRO] Não encontramos este módulo.");
     } else {
@@ -104,12 +104,13 @@ function tipoDeArquivoParaExecutar(pathFile, aulaEscolhido) {
   const tipoDeArquivo = String(aulaEscolhido).split(".").pop();
   switch (tipoDeArquivo) {
     case "js":
+      terminal.close();
       require(pathFile);
       break;
     case "html":
       browser(pathFile);
       terminal.write("Abrindo o navegador padrão ...\n");
-      terminal.close();
+      process.exit(0);
     default:
       throw new Error("[ERROR] Não suportamos este tipo de arquivo");
   }
