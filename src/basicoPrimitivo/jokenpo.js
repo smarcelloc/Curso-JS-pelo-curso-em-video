@@ -18,7 +18,7 @@ const opcao = {
 
 const escolhaDoPC = Math.round(Math.random() * 2) + 1;
 
-terminal.write("Vamos jogar JOKENPOOOO\n\n");
+terminal.write("Vamos jogar JOKENPÔ\n\n");
 terminal.write("As seguintes opções:\n");
 for (const index in opcao) {
   terminal.write(`[${index}] ${opcao[index]}\n`);
