@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Object Model</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+  <h1 id="titulo">DOM</h1>
+  <p id="paragrafo">
+    DOM é uma interface independente de plataforma cruzada e de linguagem que trata
+    um documento XML ou HTML como uma estrutura de árvore em que cada nó é um objeto que 
+    representa uma parte do documento.
+  </p>
+  <!------------------------------------------------------------------------------------->
+  <strong id="url">URL: </strong>
+  <script>
+    const elementoUrl = document.getElementById('url');
+    const textoDoElementoUrl = elementoUrl.innerText;
+    const url = document.location;
+
+    elementoUrl.innerText = textoDoElementoUrl + url.href;
+  </script>
+  <!------------------------------------------------------------------------------------->
+  <hr>
+  <table id="table-location">
+    <thead>
+      <th>Descrição</th>
+      <th>Valor</th>
+    </thead>
+    <tbody id="valoresLocation">
+
+    </tbody>
+  </table>
+
+  <script>
+    const elementoTbody = document.querySelector('tbody#valoresLocation')
+    criarElementosHTML = [
+      {
+        descricao: "URL",
+        valor: location.href
+      },
+      {
+        descricao: "Protocol",
+        valor: location.protocol
+      },
+      {
+        descricao: "Host",
+        valor: location.hostname
+      },
+      {
+        descricao: "Port",
+        valor: location.port
+      },
+      {
+        descricao: "Path Name",
+        valor: location.pathname
+      }
+    ];
+
+    let conteudoDaTable = "";
+    for (const index in criarElementosHTML) {
+      let {descricao} = criarElementosHTML[index];
+      let {valor} = criarElementosHTML[index];
+      conteudoDaTable += "<tr>";
+      conteudoDaTable += `<td>${descricao}</td><td>${valor}</td>`;
+      conteudoDaTable += "</tr>";
+    }
+    elementoTbody.innerHTML = conteudoDaTable
+  </script>
+  <!------------------------------------------------------------------------------------->
+</body>
+</html>

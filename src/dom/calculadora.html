@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="mt-5 p-5">
+    <textarea class="mb-3" id="operacao"></textarea>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="."
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              .
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="("
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              (
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value=")"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              )
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="/"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              /
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="7"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              7
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="8"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              8
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="9"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              9
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="-"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              -
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="4"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              4
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="5"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              5
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="6"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              6
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="+"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              +
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="1"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              1
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="2"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              2
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="3"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              3
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="*"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              x
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-dark w-100"
+              value="0"
+              onclick="exibirTextAreaOperacao(this)"
+            >
+              0
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-outline-danger w-100"
+              onclick="apagarCaractereNoTextArea()"
+            >
+              C
+            </button>
+          </td>
+          <td colspan="2">
+            <button
+              type="button"
+              class="btn btn-success w-100"
+              onclick="calcular()"
+            >
+              =
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <input
+      type="text"
+      id="resultado"
+      class="mt-3"
+      disabled
+      placeholder="Resultado..."
+    />
+    <h2 class="mt-4">Histórico</h2>
+    <button class="btn-sm btn-danger my-2" onclick="limparHistorico()">
+      LIMPAR
+    </button>
+    <table class="table">
+      <thead>
+        <th>Operacao</th>
+        <th>Resultado</th>
+      </thead>
+      <tbody id="tbodyHistorico"></tbody>
+    </table>
+    <script>
+      const textareaOp = document.querySelector("#operacao");
+      const elementoResultado = document.querySelector("#resultado");
+      const tbodyHistorico = document.querySelector("#tbodyHistorico");
+
+      let historico = [];
+
+      function exibirTextAreaOperacao(element) {
+        const { value } = element;
+        textareaOp.innerHTML += value;
+      }
+
+      function apagarCaractereNoTextArea() {
+        const conteudo = textareaOp.innerHTML;
+        if (conteudo != "") {
+          const apagarUltimoCaracter = conteudo.slice(0, -1);
+          textareaOp.innerHTML = apagarUltimoCaracter;
+        }
+      }
+
+      function calcular() {
+        try {
+          const operacao = textareaOp.innerHTML;
+          const resultado = eval(operacao); // calcular em uma string
+          elementoResultado.setAttribute("value", resultado);
+          textareaOp.innerHTML = "";
+          historico.push({ operacao, resultado });
+          historicoArmazenarNaTable();
+        } catch (error) {
+          alert("Operação inválida");
+        }
+      }
+
+      function historicoArmazenarNaTable() {
+        let conteudoParaTable = "";
+        historico.forEach((element) => {
+          conteudoParaTable += "<tr>";
+          conteudoParaTable += `<td>${element.operacao}</td>`;
+          conteudoParaTable += `<td>${element.resultado}</td>`;
+          conteudoParaTable += "</tr>";
+        });
+
+        tbodyHistorico.innerHTML = conteudoParaTable;
+      }
+
+      function limparHistorico() {
+        historico = [];
+        tbodyHistorico.innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
